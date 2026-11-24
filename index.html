@@ -416,6 +416,61 @@ td.k{font-weight:700;white-space:nowrap}
 .vw-note{margin:14px 0 0;font-size:var(--fs-body);color:var(--muted)}
 @media (max-width:640px){.vw-frame{height:max(560px,calc(100vh - var(--hdr-h,150px) - 40px))}}
 
+/* Prompt editor */
+.pe{margin-top:28px;border-radius:20px;border:2px solid var(--c4);background:var(--surface);overflow:hidden;box-shadow:0 14px 30px -18px rgba(142,68,173,.6)}
+.pe-h{display:flex;align-items:center;gap:14px;padding:16px 20px;background:linear-gradient(100deg,#7a3f96,#9b59b6);color:#ffffff}
+.pe-ic{flex:none;width:48px;height:48px;border-radius:14px;display:grid;place-items:center;font-size:26px;background:rgba(255,255,255,.2);border:1.5px solid rgba(255,255,255,.4)}
+.pe-h b{display:block;font-size:var(--fs-l3);font-weight:700;letter-spacing:.02em}
+.pe-h small{display:block;font-size:var(--fs-meta);opacity:.95;margin-top:2px}
+.pe-bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;padding:12px 20px 0}
+.pe-bar2{padding-bottom:12px;border-bottom:1px solid var(--line)}
+.pe-seg{display:inline-flex;padding:4px;gap:4px;border-radius:999px;background:var(--surface-2);border:1px solid var(--line)}
+.pe-seg button{white-space:nowrap;appearance:none;border:0;font:inherit;font-size:14px;font-weight:700;cursor:pointer;padding:7px 14px;border-radius:999px;background:transparent;color:var(--muted)}
+.pe-seg button[aria-pressed="true"]{background:var(--c4);color:#ffffff}
+.pe-legend{display:flex;flex-wrap:wrap;gap:6px}
+.pe-tag{display:inline-flex;align-items:center;gap:3px;font-size:12.5px;font-weight:700;padding:2px 9px;border-radius:999px;border:1.5px solid;white-space:nowrap;line-height:1.5;vertical-align:2px}
+.pe-tag.must{color:color-mix(in srgb,var(--c2) 80%,var(--text));border-color:var(--c2);background:color-mix(in srgb,var(--c2) 10%,var(--surface))}
+.pe-tag.follow{color:color-mix(in srgb,var(--c3) 75%,var(--text));border-color:var(--c3);background:color-mix(in srgb,var(--c3) 10%,var(--surface))}
+.pe-tag.opt{color:color-mix(in srgb,var(--c5) 80%,var(--text));border-color:var(--c5);background:color-mix(in srgb,var(--c5) 10%,var(--surface))}
+.pe-tag.keep{color:var(--muted);border-color:var(--muted);background:var(--surface-2)}
+.pe-stat{font-size:var(--fs-body);font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums}
+.pe-stat .ok{color:color-mix(in srgb,var(--c5) 80%,var(--text))}
+.pe-acts{display:flex;flex-wrap:wrap;gap:8px;margin-left:auto}
+.pe-btn{appearance:none;font:inherit;font-size:14px;font-weight:700;cursor:pointer;padding:8px 14px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);color:var(--text)}
+.pe-btn:hover{background:var(--surface-2)}
+.pe-primary{background:var(--c4);border-color:var(--c4);color:#ffffff}
+.pe-primary:hover{background:color-mix(in srgb,var(--c4) 85%,#000)}
+.pe-in{padding:14px 20px;border-bottom:1px solid var(--line);background:var(--surface-2);display:flex;flex-direction:column;gap:10px}
+.pe-in[hidden],.pe-warn[hidden]{display:none}
+.pe-in label{font-weight:700;font-size:var(--fs-body);color:var(--primary)}
+.pe-in textarea{width:100%;font:15px/1.7 var(--sans);padding:12px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--text);resize:vertical}
+.pe-in .pe-acts{margin-left:0}
+.pe-warn{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:12px 20px;background:color-mix(in srgb,var(--c2) 10%,var(--surface));border-bottom:1px solid color-mix(in srgb,var(--c2) 40%,var(--line));font-weight:700;color:color-mix(in srgb,var(--c2) 75%,var(--text))}
+.pe-doc{padding:18px 20px;font-size:16.5px;line-height:2.3;color:var(--text)}
+.pe-line{position:relative;padding:4px 0;border-bottom:1px dashed transparent}
+.pe-line.del{opacity:.45;text-decoration:line-through}
+.pe-line.del .pe-f{pointer-events:none}
+.pe-line.lock{font-weight:700;color:var(--primary)}
+.pe-f{border-radius:4px;padding:1px 3px;outline:none;cursor:text;background:color-mix(in srgb,var(--accent) 30%,transparent);border-bottom:2px dashed color-mix(in srgb,var(--c3) 70%,var(--accent));box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.pe-f:focus{background:color-mix(in srgb,var(--accent) 55%,transparent);box-shadow:0 0 0 2px var(--c4)}
+.pe-f.edited{background:color-mix(in srgb,#2fbf7a 28%,transparent);border-bottom-color:#2fbf7a}
+.pe-f.keepf{background:var(--surface-2);border-bottom-color:var(--line)}
+.pe-f:empty::before{content:"（空白，請填入）";color:var(--muted);font-weight:400}
+.pe-f.nudge{animation:peNudge 1.4s ease-in-out infinite}
+@keyframes peNudge{50%{box-shadow:0 0 0 3px color-mix(in srgb,var(--c3) 55%,transparent)}}
+.pe-tag.chk{margin-left:4px;font-size:11.5px;color:color-mix(in srgb,var(--c3) 75%,var(--text));border-style:dashed;border-color:var(--c3)}
+.pe-del{appearance:none;font:inherit;font-size:12.5px;font-weight:700;cursor:pointer;margin-left:6px;padding:2px 10px;border-radius:999px;border:1px dashed var(--muted);background:var(--surface);color:var(--muted);vertical-align:2px;text-decoration:none}
+.pe-del:hover{color:var(--c2);border-color:var(--c2)}
+.pe.f-must .pe-f:not(.mustf),.pe.f-must .pe-tag.inl:not(.must),.pe.f-must .pe-txt{opacity:.3}
+.pe.f-edit .pe-f.keepf,.pe.f-edit .pe-tag.inl.keep,.pe.f-edit .pe-txt,.pe.f-edit .pe-line.lock{opacity:.3}
+.pe-tip{margin:0;padding:12px 20px;font-size:var(--fs-body);line-height:1.8;color:var(--muted);border-top:1px solid var(--line);background:var(--surface-2)}
+.pe-tip b{color:var(--text)}
+.pe-src{display:block;font-size:var(--fs-meta)}
+.pe-toast{margin:0;padding:0 20px;font-weight:700;color:color-mix(in srgb,var(--c5) 80%,var(--text))}
+.pe-toast:empty{display:none}
+.pe-toast:not(:empty){padding:10px 20px}
+@media (max-width:640px){.pe-doc{font-size:15.5px;padding:14px 16px}.pe-bar{padding-inline:16px}.pe-acts{margin-left:0}.pe-btn{flex:1 1 auto}.pe-seg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%}.pe-seg button{white-space:nowrap;font-size:13px;padding:7px 4px}.pe-h{padding:14px 16px}.pe-tip,.pe-in,.pe-warn{padding-inline:16px}}
+
 /* Quick chips */
 .quick{margin-top:22px;display:flex;flex-direction:column;align-items:center;gap:10px}
 .quick-h{font-size:14px;font-weight:700;color:var(--primary);letter-spacing:.06em}
@@ -591,13 +646,13 @@ footer .wrap{max-width:1080px}
   <div class="panel" id="p-intro" role="tabpanel" aria-labelledby="t-intro">
   <!-- 引言 -->
   <section class="card intro" aria-labelledby="intro-title">
-    <div class="eyebrow">引言 · 21st Century Skills</div>
+    <div class="eyebrow">引言 · 21 世紀技能</div>
     <h2 class="big" id="intro-title">以 21 世紀八大思考素養，帶動數學單元備課</h2>
     <p class="lede">數學領域中央輔導團與「就是要學好數學（JDM）」計畫，將 <strong>21 世紀技能</strong>定調為數學素養教學與評量的指標。這個網頁協助國中小數學老師在單元或主題備課時，朝八大思考素養的方向設計提問、任務與評量，並借助 AI 小幫手提供的靈感，讓個人或共備社群持續精進。</p>
 
     <h3 class="sub">為什麼是八大思考素養</h3>
     <div class="why">
-      <div><b>🇹🇼 臺灣公民的核心素養</b><p>科技研發需要研究與探究、創造力、系統性思維、資訊使用與自主堅毅；自由民主社會需要理性溝通、批判性思考與反思。</p></div>
+      <div><b>🇹🇼 臺灣公民的核心素養</b><p>科技研發需要研究與探究、創造力、系統性思維、資訊使用、自主與堅持；自由民主社會需要理性溝通、批判性思考與反思。</p></div>
       <div><b>🌐 PISA 2022 的評量指標</b><p>PISA 2022 主測數學素養，評量設計就以 21 世紀技能為指標，有成熟的評量方法論可以參考。</p></div>
       <div><b>📘 完備 108 課綱「五觀、六標」</b><p>能帶出課綱倡導的素養教學，還補上課綱沒有明示的<strong>創造力</strong>與<strong>反思</strong>。</p></div>
     </div>
@@ -670,7 +725,7 @@ footer .wrap{max-width:1080px}
         <div><span>💭</span><b>你自己的想法</b><p>寫下你對某個概念或教法的理解，讓小幫手幫你檢驗。</p></div>
         <div><span>🧮</span><b>一道題目、學生作答</b><p>找出題目背後的知識節點，或診斷學生的迷思。</p></div>
         <div><span>📝</span><b>教案、學習單</b><p>讓小幫手對準你的教學設計，給出扣合內容的建議。</p></div>
-        <div><span>📸</span><b>課本、習作頁面</b><p>拍照或截圖後上傳「來源」；無法上傳時，用 VLM 轉譯工具轉成 md 貼上。</p></div>
+        <div><span>📸</span><b>課本、習作頁面</b><p>拍照或截圖後上傳「來源」；無法上傳時，用 VLM 轉譯工具（魔法棒）轉成 md 貼上。</p></div>
       </div>
       <div class="focus-tip"><span class="ft-ic">🔍</span><div><b>一次聚焦一件事，回答才會深入</b><p>輸入的範圍太大，AI 的回答容易分散、流於淺碟。建議每次只聚焦<strong>一個概念、一個提問或一個想法</strong>；素材較多時，先圈出這次要討論的那一頁、那一題或那一段。</p></div></div>
     </div>
@@ -716,7 +771,7 @@ footer .wrap{max-width:1080px}
       </div>
       <div class="mode m3">
         <div class="mode-h"><span class="mk">3</span><div><b>輸入／貼上（文字）資料</b><small>課文、教案、題目或 md 內容</small></div></div>
-        <div class="say">例：貼上 <mark class="hl">VLM 轉譯工具產出的 md 內容</mark></div>
+        <div class="say">例：貼上 <mark class="hl">VLM 轉譯工具（魔法棒）產出的 md 內容</mark></div>
         <ul class="out">
           <li>🗂️ <b>知識節點</b>：依素材的主題脈絡，整理出相關的知識節點與關鍵技能</li>
           <li>🧱 <b>系列性的教師提問</b>：從生活、操作語言，逐步轉到數學語言</li>
@@ -759,7 +814,7 @@ footer .wrap{max-width:1080px}
     <div class="clue">
       <div class="clue-h">
         <span class="clue-ic">📋</span>
-        <div><b>下一步提示詞長這樣</b><small>小幫手會依你前面的選擇，先填好 <span class="fill sm">【 】</span> 裡的內容</small></div>
+        <div><b>下一步提示詞長這樣</b><small>小幫手會依你前面的選擇，先填好<span class="fill sm">【 】</span>裡的內容</small></div>
       </div>
       <div class="clue-body">
         <div class="clue-line lead-l">➡️ 我要進入第二階段——進階提問</div>
@@ -816,6 +871,46 @@ footer .wrap{max-width:1080px}
         </div>
       </div>
     </div>
+    <div class="pe" id="pe">
+      <div class="pe-h">
+        <span class="pe-ic" aria-hidden="true">🧰</span>
+        <div><b>提示詞修改器</b><small>貼上小幫手給的下一步提示詞，網頁會標出可以改的地方；改完一鍵複製，回到小幫手的對話框貼上送出</small></div>
+      </div>
+      <div class="pe-bar">
+        <div class="pe-seg" role="group" aria-label="顯示範圍">
+          <button type="button" data-pf="all" aria-pressed="true">全部</button>
+          <button type="button" data-pf="must" aria-pressed="false">✏️ 只看必改</button>
+          <button type="button" data-pf="edit" aria-pressed="false">只看可修改</button>
+        </div>
+        <div class="pe-legend" aria-label="標籤說明">
+          <span class="pe-tag must">✏️ 必改</span><span class="pe-tag follow">🔗 跟著改</span><span class="pe-tag opt">✨ 選改</span><span class="pe-tag keep">🔒 建議保留</span>
+        </div>
+      </div>
+      <div class="pe-bar pe-bar2">
+        <span class="pe-stat" id="pe-stat">已修改 0 / 0 處 · 必改 0 / 0</span>
+        <div class="pe-acts">
+          <button type="button" class="pe-btn" id="pe-open">📥 貼上我的提示詞</button>
+          <button type="button" class="pe-btn" id="pe-reset">↺ 全部還原</button>
+          <button type="button" class="pe-btn pe-primary" id="pe-copy">📋 複製完整指令</button>
+        </div>
+      </div>
+      <div class="pe-in" id="pe-in" hidden>
+        <label for="pe-src">把小幫手回覆最後的「下一步提示詞」整段貼在這裡</label>
+        <textarea id="pe-src" rows="7" spellcheck="false" placeholder="➡️我要進入第二階段--進階提問&#10;我想針對的數學內容是&quot;【…】&quot;…"></textarea>
+        <div class="pe-acts">
+          <button type="button" class="pe-btn pe-primary" id="pe-parse">標出可修改處</button>
+          <button type="button" class="pe-btn" id="pe-sample">載入範例</button>
+          <button type="button" class="pe-btn" id="pe-close">取消</button>
+        </div>
+      </div>
+      <div class="pe-warn" id="pe-warn" hidden>
+        <span id="pe-warn-t"></span>
+        <div class="pe-acts"><button type="button" class="pe-btn" id="pe-go-edit">回去修改</button><button type="button" class="pe-btn" id="pe-force">仍要複製</button></div>
+      </div>
+      <div class="pe-doc" id="pe-doc" aria-live="polite"></div>
+      <p class="pe-tip">💡 點一下黃色底線的文字就能直接修改。<b>必改</b>：換成適合你班級的選擇；<b>跟著改</b>：上面的必改換了，這裡也要配合調整；<b>選改</b>：可改寫，也可按「🗑 刪除此行」整行拿掉；<b>建議保留</b>：小幫手靠這些文字辨認階段，盡量不要動。<span class="pe-src">（範例取自「創造力」小幫手的實際回覆）</span></p>
+      <p class="pe-toast" id="pe-toast" role="status" aria-live="polite"></p>
+    </div>
       <nav class="subpager"><span class="sp-l">切換到</span><button type="button" data-subgo="s1">📥 輸入素材</button><button type="button" data-subgo="s2">🔀 輸入方式</button></nav>
     </div>
     <div class="overview">
@@ -857,8 +952,8 @@ footer .wrap{max-width:1080px}
     </div>
     <div class="vw-frame" id="vw-frame">
       <button type="button" class="vw-exit" id="vw-exit" hidden>✕ 離開全螢幕</button>
-      <div class="vw-loading" id="vw-loading">🪄 VLM 魔法棒載入中…</div>
-      <iframe id="vw-iframe" title="VLM 魔法棒：Prompt 與 Markdown 工作台"></iframe>
+      <div class="vw-loading" id="vw-loading">🪄 VLM 轉譯工具（魔法棒）載入中…</div>
+      <iframe id="vw-iframe" title="VLM 轉譯工具（魔法棒）：Prompt 與 Markdown 工作台"></iframe>
     </div>
     <p class="vw-note">💡 小幫手的「來源」區無法上傳素材時，用這個工具把素材轉成 md，再貼到小幫手中間的對話框。</p>
   </section>
@@ -869,8 +964,8 @@ footer .wrap{max-width:1080px}
   <!-- 小幫手連結 -->
   <section aria-labelledby="helpers-title">
     <div class="center-title">
-      <h2 id="helpers-title">啟動您的八大思考素養小幫手</h2>
-      <p>點選標籤或卡片開啟 NotebookLM 小幫手。虛線的小幫手正在整理中。</p>
+      <h2 id="helpers-title">啟動你的八大思考素養小幫手</h2>
+      <p>點選標籤或卡片開啟 Gemini Notebook 小幫手。虛線的小幫手正在整理中。</p>
     </div>
     <div class="quick" aria-label="快速開啟小幫手">
       <span class="quick-h">⚡ 快速開啟</span>
@@ -914,7 +1009,7 @@ footer .wrap{max-width:1080px}
           <div class="or">或</div>
           <div class="hitem"><span class="m">2</span><div><b>發表「直述意見」</b><span>以第一人稱發言的句構。</span></div></div>
           <div class="or">或</div>
-          <div class="hitem"><span class="m">3</span><div><b>輸入／貼上（文字）資料</b><span>使用 <kbd>Ctrl</kbd>+<kbd>V</kbd>（Mac 為 <kbd>⌘</kbd>+<kbd>V</kbd>）貼上，例如 <mark class="hl">VLM 轉譯工具產出的 md 內容</mark>。</span></div></div>
+          <div class="hitem"><span class="m">3</span><div><b>輸入／貼上（文字）資料</b><span>使用 <kbd>Ctrl</kbd>+<kbd>V</kbd>（Mac 為 <kbd>⌘</kbd>+<kbd>V</kbd>）貼上，例如 <mark class="hl">VLM 轉譯工具（魔法棒）產出的 md 內容</mark>。</span></div></div>
         </div>
         <div class="hitem note"><span class="m">💡</span><div><b>本場不會使用到右方「工作室」</b><span>可按「工作室」右上角的 <span class="ic-fold" aria-hidden="true"></span> 圖示（收合「工作室」面板），讓可視畫面更大。</span></div></div>
       </div>
@@ -967,9 +1062,9 @@ footer .wrap{max-width:1080px}
   <section class="cite" aria-labelledby="cite-title">
     <h3 id="cite-title"><span>😄</span>公開介紹本工具，或發表使用成果時，請註明引用來源。</h3>
     <div class="cite-grid">
-      <div><div class="eyebrow">Reference</div><b>📌 引用來源</b><p>VLM 轉譯工具（魔法棒）：優履工作室 X 滔滔學教育學社 研發設計；基礎提示詞引自臺師大教創中心與優履團隊（UNI）</p></div>
-      <div><div class="eyebrow">Introduction</div><b>📖 引言整理自</b><p>林福來〈二十一世紀技能：數學素養教學與評量的指標〉；〈21 世紀技能的說明與操作型定義〉</p></div>
-      <div><div class="eyebrow">Educational</div><b>🌸 教育使用</b><p>免費提供所有教育使用者，智慧財產需要您一起共同維護喔～</p></div>
+      <div><div class="eyebrow">Reference</div><b>📌 引用來源</b><p>VLM 轉譯工具（魔法棒）：優履工作室 X 滔滔學教育學社 研發設計；基礎提示詞引自臺師大教創中心與優履團隊（UNI）。</p></div>
+      <div><div class="eyebrow">Introduction</div><b>📖 引言整理自</b><p>林福來〈二十一世紀技能：數學素養教學與評量的指標〉；〈21 世紀技能的說明與操作型定義〉。</p></div>
+      <div><div class="eyebrow">Educational</div><b>🌸 教育使用</b><p>免費提供所有教育使用者，智慧財產需要你一起共同維護喔～</p></div>
       <div><div class="eyebrow">Purpose</div><b>🤖 設計目的</b><p>優雅建構高質量、低 Token 消耗的 AI 結構化知識庫，支援八大思考素養教學。</p></div>
     </div>
   </section>
@@ -1081,6 +1176,125 @@ footer .wrap{max-width:1080px}
     e.preventDefault(); show(keys[i],false); document.getElementById('st-'+keys[i]).focus();
   });
   show('s1',false);
+})();
+</script>
+<script>
+(function(){
+  var box=document.getElementById('pe'); if(!box) return;
+  var doc=document.getElementById('pe-doc'),stat=document.getElementById('pe-stat'),inp=document.getElementById('pe-in'),src=document.getElementById('pe-src'),
+      warn=document.getElementById('pe-warn'),warnT=document.getElementById('pe-warn-t'),toastEl=document.getElementById('pe-toast');
+  var SAMPLE='➡️我要進入第二階段--進階提問\n我想針對的數學內容是"【異分母分數加法的結構與關聯】"數學表徵是"【圖像表徵與符號表徵的轉化】"，\n提問層次是"【精緻性】"，提問靈感是"【探討分子加倍對通分後分子的乘數影響與分配律拆解】"\n促進思考的面向是\n"【真實理解的檢驗】" --/《能用圖示解釋為什麼不能直接分子加分子、分母加分母》/，\n"【數學家進一步思考】" --/《探討異分母分數加法在代數一般化下的結構規律》/，\n"【模型假設與限制】"--/《探討當兩個分數的單位1（基準量）不相同時，加法運算是否仍具備此關聯性》/......，';
+  var LABEL={must:'✏️ 必改',follow:'🔗 跟著改',opt:'✨ 選改',keep:'🔒 建議保留'};
+  var model=[];
+  function esc(t){return String(t).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function classify(seg,open,inFace){
+    if(/數學內容|數學表徵|提問層次|回饋面向|更細節的/.test(seg)) return 'must';
+    if(/提問靈感/.test(seg)) return 'follow';
+    if(open==='【' && inFace) return 'keep';
+    return 'opt';
+  }
+  function parse(text){
+    var lines=text.replace(/\r/g,'').split('\n'), out=[], inFace=false, re=/(【)([^】\n]*)(】)|(《)([^》\n]*)(》)|(⟪)([^⟫\n]*)(⟫)/g;
+    lines.forEach(function(line){
+      if(/促進思考的面向/.test(line)) inFace=true;
+      if(/^\s*➡️|我要進入第[一二三四]階段/.test(line)){ out.push({lock:true,parts:[{t:line}]}); return; }
+      var parts=[], last=0, m, seg='', hasF=false;
+      re.lastIndex=0;
+      while((m=re.exec(line))){
+        var pre=line.slice(last,m.index); if(pre) parts.push({t:pre}); seg+=pre;
+        var o=m[1]||m[4]||m[7], v=(m[2]!=null?m[2]:m[5]!=null?m[5]:m[8]), c=m[3]||m[6]||m[9];
+        var k=classify(seg,o,inFace && !/數學內容|提問層次/.test(line));
+        parts.push({t:o}); parts.push({f:true,k:k,orig:v,val:v}); parts.push({t:c});
+        seg=''; last=re.lastIndex; hasF=true;
+      }
+      if(last<line.length) parts.push({t:line.slice(last)});
+      out.push({parts:parts,deletable:inFace && hasF && !/促進思考的面向/.test(line),del:false});
+    });
+    return out;
+  }
+  function render(){
+    var h='', fi=0;
+    model.forEach(function(L,li){
+      var cls='pe-line'+(L.lock?' lock':'')+(L.del?' del':'');
+      h+='<div class="'+cls+'" data-l="'+li+'">';
+      L.parts.forEach(function(p,pi){
+        if(p.f){
+          h+='<span class="pe-f'+(p.k==='must'?' mustf':'')+(p.k==='keep'?' keepf':'')+'" contenteditable="true" spellcheck="false" role="textbox" aria-label="'+esc(LABEL[p.k])+'欄位" data-l="'+li+'" data-p="'+pi+'">'+esc(p.val)+'</span>';
+          h+='<span class="pe-tag inl '+p.k+'">'+LABEL[p.k]+'</span><span class="pe-chk" data-l="'+li+'" data-p="'+pi+'"></span>';
+        } else h+='<span class="pe-txt">'+esc(p.t)+'</span>';
+      });
+      if(L.lock) h+='<span class="pe-tag inl keep" style="margin-left:6px">'+LABEL.keep+'</span>';
+      if(L.deletable) h+='<button type="button" class="pe-del" data-l="'+li+'">'+(L.del?'↺ 復原此行':'🗑 刪除此行')+'</button>';
+      h+='</div>';
+    });
+    doc.innerHTML=h || '<p class="pe-txt">還沒有內容，請按「📥 貼上我的提示詞」。</p>';
+    update();
+  }
+  function fields(){ var a=[]; model.forEach(function(L,li){ L.parts.forEach(function(p,pi){ if(p.f) a.push({L:L,p:p,li:li,pi:pi}); }); }); return a; }
+  function update(){
+    var fs=fields(), ed=0, must=0, mustEd=0, mustTouched=false;
+    fs.forEach(function(x){ var e=x.p.val!==x.p.orig||x.L.del; if(e) ed++; if(x.p.k==='must'){ must++; if(x.p.val!==x.p.orig){ mustEd++; mustTouched=true; } } });
+    var delN=model.filter(function(L){return L.del}).length;
+    stat.innerHTML='已修改 '+(ed)+' / '+fs.length+' 處 · 必改 <span class="'+(must&&mustEd===must?'ok':'')+'">'+mustEd+' / '+must+'</span>'+(delN?' · 刪除 '+delN+' 行':'');
+    doc.querySelectorAll('.pe-f').forEach(function(el){
+      var p=model[+el.dataset.l].parts[+el.dataset.p];
+      el.classList.toggle('edited',p.val!==p.orig);
+      var nud=p.k==='follow' && mustTouched && p.val===p.orig;
+      el.classList.toggle('nudge',nud);
+      var c=doc.querySelector('.pe-chk[data-l="'+el.dataset.l+'"][data-p="'+el.dataset.p+'"]');
+      if(c) c.innerHTML=nud?'<span class="pe-tag chk">↻ 請一併檢查</span>':'';
+    });
+  }
+  function build(){
+    return model.filter(function(L){return !L.del}).map(function(L){ return L.parts.map(function(p){ return p.f?p.val:p.t; }).join(''); }).join('\n');
+  }
+  function toast(m){ toastEl.textContent=m; clearTimeout(toast._t); toast._t=setTimeout(function(){toastEl.textContent='';},3500); }
+  function load(text){ model=parse(text); warn.hidden=true; render(); }
+  doc.addEventListener('input',function(e){
+    var el=e.target.closest('.pe-f'); if(!el) return;
+    model[+el.dataset.l].parts[+el.dataset.p].val=el.textContent.replace(/\n/g,' ');
+    warn.hidden=true; update();
+  });
+  doc.addEventListener('keydown',function(e){ if(e.target.closest('.pe-f') && e.key==='Enter'){ e.preventDefault(); e.target.blur(); } });
+  doc.addEventListener('paste',function(e){
+    var el=e.target.closest('.pe-f'); if(!el) return; e.preventDefault();
+    var t=(e.clipboardData||window.clipboardData).getData('text').replace(/\s*\n\s*/g,' ');
+    if(document.queryCommandSupported && document.queryCommandSupported('insertText')) document.execCommand('insertText',false,t); else { el.textContent+=t; el.dispatchEvent(new Event('input',{bubbles:true})); }
+  });
+  doc.addEventListener('click',function(e){
+    var b=e.target.closest('.pe-del'); if(!b) return; var L=model[+b.dataset.l]; L.del=!L.del; render();
+  });
+  document.querySelectorAll('[data-pf]').forEach(function(b){ b.addEventListener('click',function(){
+    document.querySelectorAll('[data-pf]').forEach(function(x){ x.setAttribute('aria-pressed',String(x===b)); });
+    box.classList.toggle('f-must',b.dataset.pf==='must'); box.classList.toggle('f-edit',b.dataset.pf==='edit');
+  }); });
+  document.getElementById('pe-open').addEventListener('click',function(){ inp.hidden=!inp.hidden; if(!inp.hidden) src.focus(); });
+  document.getElementById('pe-close').addEventListener('click',function(){ inp.hidden=true; });
+  document.getElementById('pe-sample').addEventListener('click',function(){ src.value=SAMPLE; });
+  document.getElementById('pe-parse').addEventListener('click',function(){
+    var t=src.value.trim(); if(!t){ toast('請先貼上小幫手給的下一步提示詞'); src.focus(); return; }
+    if(!/【|《|⟪/.test(t)){ toast('找不到【 】或《 》，請確認貼上的是小幫手給的下一步提示詞'); return; }
+    load(t); inp.hidden=true; toast('已標出可修改處，點黃色底線的文字就能修改');
+  });
+  document.getElementById('pe-reset').addEventListener('click',function(){
+    model.forEach(function(L){ L.del=false; L.parts.forEach(function(p){ if(p.f) p.val=p.orig; }); }); warn.hidden=true; render(); toast('已全部還原');
+  });
+  function doCopy(){
+    var txt=build();
+    function ok(){ warn.hidden=true; toast('✅ 已複製完整指令，請回到小幫手的對話框貼上送出'); }
+    function fb(){ inp.hidden=false; src.value=txt; src.focus(); src.select(); var d=false; try{d=document.execCommand('copy')}catch(e){} if(d) ok(); else toast('已幫你選取全文，請按 Ctrl+C（Mac 為 ⌘+C）複製'); }
+    if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(ok,fb); else fb();
+  }
+  document.getElementById('pe-copy').addEventListener('click',function(){
+    var fs=fields().filter(function(x){return x.p.k==='must' && x.p.val===x.p.orig && !x.L.del;});
+    if(fs.length){ warnT.textContent='⚠️ 還有 '+fs.length+' 處「必改」維持小幫手的預填內容。先想一想是不是你要的選擇？'; warn.hidden=false; return; }
+    doCopy();
+  });
+  document.getElementById('pe-force').addEventListener('click',doCopy);
+  document.getElementById('pe-go-edit').addEventListener('click',function(){
+    warn.hidden=true; var el=[].slice.call(doc.querySelectorAll('.pe-f.mustf')).find(function(x){return !x.classList.contains('edited')}); if(el){ el.focus(); var r=document.createRange(); r.selectNodeContents(el); var s=getSelection(); s.removeAllRanges(); s.addRange(r); }
+  });
+  load(SAMPLE);
 })();
 </script>
 <div class="zoom-layer" id="zoom-layer" hidden>
